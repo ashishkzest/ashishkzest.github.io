@@ -94,7 +94,8 @@ function failureHandler(error) {
 function getScaleRenderVideo() {
     const windowWidth = window.innerWidth;
     const video = document.querySelector('video');
-    // const screenshotButton = document.querySelector('#screenshot-button');
+    const screenshotButton = document.querySelector('#screenshot-button');
+    screenshotButton.classList.remove('hidden');
     const videoHeight = video.videoHeight;
     const videoWidth = video.videoWidth;
     const paddedWidth =  50;
