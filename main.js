@@ -109,5 +109,15 @@ function getScaleRenderVideo() {
     console.log('scale ', scale);
     console.log('wrapperHeight ', wrapperHeight);
     console.log('wrapperWidth ', wrapperWidth);
-
+    resizeDivs(wrapperHeight, wrapperWidth, scale);
+  }
+function resizeDivs(wrapperHeight, wrapperWidth, scale) {
+    const video = document.querySelector('video');
+    const wrapper = document.querySelector('#_cameraWrapper');
+    const wrapperInner = document.querySelector('#_cameraWrapper_inner');
+    const viewportScale = document.querySelector('#_viewportScale');
+    wrapper.setAttribute('style', `min-height: ${wrapperHeight}; min-width: ${wrapperWidth}`);
+    wrapperInner.setAttribute('style', `height: ${wrapperHeight}; width: ${wrapperWidth}`);
+    viewportScale.setAttribute('style', `height: ${wrapperHeight}; width: ${wrapperWidth}`);
+    video.setAttribute('style', `transform-origin: 0px 0px 0px; transform: scale(${scale})`);
   }
