@@ -66,10 +66,10 @@ function successHandler(stream) {
     video.play();
     video.onloadedmetadata = (e) => {
       console.log('got video stream')
-      // getScaleRenderVideo();
+      getScaleRenderVideo();
     };
     video.addEventListener('loadedmetadata', (e) => {
-      // getScaleRenderVideo
+      getScaleRenderVideo
       console.log('got video stream')
     });
   }
@@ -86,4 +86,28 @@ function failureHandler(error) {
         msg = 'User denied access to use camera.';
       }
     }
+  }
+
+function getScaleRenderVideo() {
+    const windowWidth = window.innerWidth;
+    const landscapeRatio = 3 / 4;
+    const portraitRatio = 4 / 3;
+    const video = document.querySelector('video');
+    // const screenshotButton = document.querySelector('#screenshot-button');
+    const videoHeight = video.videoHeight;
+    const videoWidth = video.videoWidth;
+    const paddedWidth =  50;
+    let scale = (windowWidth - paddedWidth) / videoWidth;
+    let wrapperHeight = Math.min((videoHeight * scale), (videoWidth * scale * landscapeRatio)) + 'px';
+    let wrapperWidth = (videoWidth * scale) + 'px';
+    if (false) {
+      const temp = wrapperHeight;
+      wrapperHeight = wrapperWidth;
+      wrapperWidth = temp;
+      scale = portraitRatio * scale;
+    }
+    console.log('scale ', scale);
+    console.log('wrapperHeight ', wrapperHeight);
+    console.log('wrapperWidth ', wrapperWidth);
+
   }

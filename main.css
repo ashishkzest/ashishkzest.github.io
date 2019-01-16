@@ -1,0 +1,94 @@
+.camera-wrapper {
+    display: inline-block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: opacity 150ms;
+    -o-transition: opacity 150ms;
+    -moz-transition: opacity 150ms;
+    transition: opacity 150ms;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 600px;
+  }
+  .camera-viewport {
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  .camera-viewport:before {
+    content: " ";
+    display: block;
+    height: calc(100% - 20px);
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - 20px);
+    left: 10px;
+    top: 10px;
+    border: 3px solid #fefefe;
+    box-shadow: 0 0 20px 20px rgba(255, 255, 255, 0.6);
+  }
+  .camera-viewport:after {
+    content: "Loading your camera....";
+    text-align: center;
+    line-height: 8rem;
+    display: block;
+    height: calc(100% - 20px);
+    position: absolute;
+    z-index: -1;
+    width: calc(100% - 20px);
+    left: 10px;
+    top: 10px;
+  }
+  .camera-viewport .ovalface-overlay {
+    width: 50%;
+    max-width: 190px;
+    height: 89%;
+    max-height: 240px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  .camera-wrapper_inner {
+    position: relative;
+    margin: 0 auto;
+  }
+  .preview-image {
+    position: absolute;
+    top: 0;
+  }
+  .placeholder-wrapper {
+    margin: 1rem auto;
+  }
+  .title-main::first-letter {
+    text-transform: uppercase;
+  }
+  .camera-button {
+    background: #00d20d;
+  }
+  .camera-button img {
+    max-width: 40px;
+    max-height: 34px;
+    top: 10px;
+  }
+  .camera-button.hidden {
+    visibility: hidden;
+    display: inline-block !important;
+  }
+  .error-msg {
+    font-size: 0.875rem;
+    color: red;
+    position: relative;
+    top: -9px;
+  }
+  @media screen and (max-width: 768px) {
+    .ovalface-overlay {
+      width: 40% !important;
+    }
+  }
+  
