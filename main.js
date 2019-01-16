@@ -1,4 +1,7 @@
 var consoleMsg = document.getElementById('consoleMsg');
+let wrapperHeight, wrapperWidth, scale;
+const landscapeRatio = 3 / 4;
+const portraitRatio = 4 / 3;
 function checkForUserMedia() {
   navigator.getMedia = (
     navigator.getUserMedia ||
@@ -90,28 +93,29 @@ function failureHandler(error) {
 
 function getScaleRenderVideo() {
     const windowWidth = window.innerWidth;
-    const landscapeRatio = 3 / 4;
-    const portraitRatio = 4 / 3;
     const video = document.querySelector('video');
     // const screenshotButton = document.querySelector('#screenshot-button');
     const videoHeight = video.videoHeight;
     const videoWidth = video.videoWidth;
     const paddedWidth =  50;
-    let scale = (windowWidth - paddedWidth) / videoWidth;
-    let wrapperHeight = Math.min((videoHeight * scale), (videoWidth * scale * landscapeRatio)) + 'px';
-    let wrapperWidth = (videoWidth * scale) + 'px';
+    let _scale = (windowWidth - paddedWidth) / videoWidth;
+    let _wrapperHeight = Math.min((videoHeight * _scale), (videoWidth * _scale * landscapeRatio)) + 'px';
+    let _wrapperWidth = (videoWidth * _scale) + 'px';
     if (false) {
-      const temp = wrapperHeight;
-      wrapperHeight = wrapperWidth;
-      wrapperWidth = temp;
-      scale = portraitRatio * scale;
+      const temp = _wrapperHeight;
+      _wrapperHeight = _wrapperWidth;
+      _wrapperWidth = temp;
+      _scale = portraitRatio * _scale;
     }
-    console.log('scale ', scale);
-    console.log('wrapperHeight ', wrapperHeight);
-    console.log('wrapperWidth ', wrapperWidth);
-    resizeDivs(wrapperHeight, wrapperWidth, scale);
+    scale = _scale;
+    wrapperHeight = _wrapperHeight;
+    wrapperWidth = _wrapperWidth;
+    console.log('scale ', _scale);
+    console.log('wrapperHeight ', _wrapperHeight);
+    console.log('wrapperWidth ', _wrapperWidth);
+    resizeDivs();
   }
-function resizeDivs(wrapperHeight, wrapperWidth, scale) {
+function resizeDivs() {
     const video = document.querySelector('video');
     const wrapper = document.querySelector('#_cameraWrapper');
     const wrapperInner = document.querySelector('#_cameraWrapper_inner');
@@ -120,4 +124,51 @@ function resizeDivs(wrapperHeight, wrapperWidth, scale) {
     wrapperInner.setAttribute('style', `height: ${wrapperHeight}; width: ${wrapperWidth}`);
     viewportScale.setAttribute('style', `height: ${wrapperHeight}; width: ${wrapperWidth}`);
     video.setAttribute('style', `transform-origin: 0px 0px 0px; transform: scale(${scale})`);
+  }
+function takeScreenshot() {
+    const screenshotButton = document.querySelector('#screenshot-button');
+    screenshotButton.classList.add('hidden');
+    const img = document.querySelector('#screenshot img');
+    const video = document.querySelector('#screenshot video');
+    const canvas = document.createElement('canvas');
+    const height = Math.min(video.videoHeight, video.videoWidth * landscapeRatio);
+    canvas.width = video.videoWidth;
+    canvas.height = height;
+    let w = canvas.width;
+    let h = height;
+    if (false) {
+      w = Number(wrapperWidth.slice(0, -2)) / scale;
+      h = Number(wrapperHeight.slice(0, -2)) / scale;
+      canvas.width = w;
+      canvas.height = h;
+    }
+    canvas.getContext('2d').drawImage(video, 0, 0, w, h, 0, 0, w, h);
+    // Other browsers will fall back to image/png
+    img.hidden = false;
+    const quality = 1;
+    // if (video.videoWidth > 720) {
+    //   quality = 1;
+    // }
+    img.src = canvas.toDataURL('image/jpeg', quality);
+    if (img && img.style) {
+      img.style.height = wrapperHeight;
+      img.style.width = wrapperWidth;
+    }
+    setTimeout(() => {
+      stopStreamedVideo();
+    }, 300);
+  }
+
+  function stopStreamedVideo() {
+    const videoElem = document.querySelector('#screenshot video');
+    if (videoElem) {
+      const stream = videoElem.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(function (track) {
+        track.stop();
+      });
+
+      videoElem.srcObject = null;
+    }
   }
