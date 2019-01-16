@@ -1,1 +1,40 @@
-hello world
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>KYC Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    
+</head>
+<body>
+    <div id='consoleMsg'></div>
+    <div id="screenshot" class="upload-content">
+    <div class="post-title">
+        Your name and photo should be clearly visible
+    </div>
+    <div class="post-title">
+        Make sure your face fits inside the oval and is clearly visible
+    </div>
+    <div class="placeholder-wrapper text-center">
+
+    </div>
+    <div class="camera-wrapper" id="_cameraWrapper" >
+        <div class="camera-wrapper_inner" id="_cameraWrapper_inner" >
+        <div class="camera-viewport">
+            <div id="_viewportScale" >
+            <div></div>
+            <video autoplay class="stream-player"></video>
+            </div>
+        </div>
+        <div class="preview-image">
+            <img src="">
+        </div>
+        </div>
+    </div>
+    <canvas style="display:none;"></canvas>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
