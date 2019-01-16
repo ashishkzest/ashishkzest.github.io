@@ -40,8 +40,7 @@ function startStreamedVideo(retake = false) {
     const hdConstraints = {
       video: {
         facingMode: { ideal: 'environment' },
-        width: 1200,
-        height: 1600
+        width: 500
       }
     };
     if (navigator.getMedia) {
