@@ -39,9 +39,8 @@ checkForUserMedia();
 function startStreamedVideo(retake = false) {
     const hdConstraints = {
       video: {
-        facingMode: "environment",
-        height: 1125,
-        width: 1500,
+        facingMode: { ideal: 'environment' },
+        width: 1200
       }
     };
     if (navigator.getMedia) {
