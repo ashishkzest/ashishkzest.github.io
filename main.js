@@ -89,6 +89,8 @@ function failureHandler(error) {
         msg = 'User denied access to use camera.';
       }
     }
+    const cameraWrapper = document.querySelector('.camera-wrapper');
+    screenshotButton.classList.add('hidden');
   }
 
 function getScaleRenderVideo() {

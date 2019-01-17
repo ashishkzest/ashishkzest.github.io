@@ -86,6 +86,9 @@
     position: relative;
     top: -9px;
   }
+  .camera-wrapper.hidden {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
     .ovalface-overlay {
       width: 40% !important;
