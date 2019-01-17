@@ -90,7 +90,7 @@ function failureHandler(error) {
       }
     }
     const cameraWrapper = document.querySelector('.camera-wrapper');
-    screenshotButton.classList.add('hidden');
+    cameraWrapper.classList.add('hidden');
   }
 
 function getScaleRenderVideo() {
