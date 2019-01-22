@@ -122,13 +122,16 @@ function getScaleRenderVideo() {
 }
 function startScanning() {
     const video = document.querySelector('#screenshot video');
-    var canvasElement = document.getElementById("canvas");
-    var canvas = canvasElement.getContext("2d");
+    const canvasElement = document.createElement('canvas');
+    const canvas = canvasElement.getContext("2d");
+    const height = Math.min(video.videoHeight, video.videoWidth * landscapeRatio);
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
         canvasElement.hidden = false;
-        canvasElement.height = video.videoHeight;
+        canvasElement.height = height;
         canvasElement.width = video.videoWidth;
-        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        let w = canvas.width;
+        let h = height;
+        canvas.drawImage(video, 0, 0, w, h, 0, 0, w, h);
         var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
         var code = jsQR(imageData.data, imageData.width, imageData.height, {
             inversionAttempts: "dontInvert",
