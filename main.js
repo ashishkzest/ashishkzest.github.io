@@ -157,6 +157,11 @@ function takeScreenshot() {
       img.style.height = wrapperHeight;
       img.style.width = wrapperWidth;
     }
+    const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imgData.data, imgData.width, imgData.height);
+    if (code) {
+        console.log("Found QR code", code);
+    }
     setTimeout(() => {
       stopStreamedVideo();
     }, 300);
