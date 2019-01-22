@@ -67,6 +67,9 @@ function successHandler(stream) {
     video.srcObject = stream;
     video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
     video.play();
+    const track = stream.getVideoTracks()[0];
+    const capabilities = track.getCapabilities();
+    console.log(capabilities);
     requestAnimationFrame(startScanning);
     video.onloadedmetadata = (e) => {
         console.log('got video stream')
