@@ -158,7 +158,7 @@ function takeScreenshot() {
       img.style.width = wrapperWidth;
     }
     const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-    const code = jsQR(imgData.data, imgData.width, imgData.height);
+    const code = window.jsQR(imgData.data, imgData.width, imgData.height);
     if (code) {
         document.write("Found QR code", code);
     }
