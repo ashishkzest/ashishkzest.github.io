@@ -137,11 +137,8 @@ function startScanning() {
             inversionAttempts: "dontInvert",
         });
         if (code) {
-            drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-            drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-            drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-            drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-
+            // document.write(code);
+            console.log(code);
         }
     }
     requestAnimationFrame(startScanning);
