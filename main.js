@@ -53,5 +53,13 @@ player.on('startRecord', function() {
 player.on('finishRecord', function() {
     // the blob object contains the recorded data that
     // can be downloaded by the user, stored on server etc.
-    console.log('finished recording: ', player.recordedData);
+    var data = player.recordedData;
+    console.log('finished recording: ', data);
+    var formData = new FormData();
+    formData.append('file', data, data.name);
+    console.log('uploading recording:', data.name);
+    console.log({
+        method: 'POST',
+        body: formData
+    });
 });
